@@ -1,0 +1,128 @@
+A:
+  color: grey
+  shape:
+    0:
+      - 0
+      - 1
+    1:
+      - 1
+    2:
+      - 1
+B:
+  color: light-blue
+  shape:
+    0:
+      - 0
+      - 1
+    1:
+      - 0
+      - 1
+    2:
+      - 1
+C:
+  color: light-pink
+  shape:
+    0:
+      - 0
+      - 1
+    1:
+      - 1
+    2:
+      - 1
+    3:
+      - 1
+D:
+  color: light-green
+  shape:
+    0:
+      - 0
+    1:
+      - -1
+      - 0
+    2:
+      - 0
+    3:
+      - 0
+E:
+  color: purple
+  shape:
+    0:
+      - 0
+    1:
+      - 0
+      - 1
+    2:
+      - 1
+    3:
+      - 1
+F:
+  color: pink
+  shape:
+    0:
+      - 0
+      - 1
+    1:
+      - 1
+G:
+  color: blue
+  shape:
+    0:
+      - 0
+      - 1
+      - 2
+    1:
+      - 2
+    2:
+      - 2
+H:
+  color: orange
+  shape:
+    0:
+      - 0
+      - 1
+    1:
+      - 1
+      - 2
+    2:
+      - 2
+I:
+  color: white
+  shape:
+    0:
+      - 0
+      - 1
+      - 2
+    1:
+      - 0
+      - 2
+J:
+  color: dark-green
+  shape:
+    0:
+      - 0
+    1:
+      - 0
+    2:
+      - 0
+    3:
+      - 0
+K:
+  color: yellow
+  shape:
+    0:
+      - 0
+      - 1
+    1:
+      - 0
+      - 1
+L:
+  color: red
+  shape:
+    0:
+      - 0
+    1:
+      - -1
+      - 0
+      - 1
+    2:
+      - 0

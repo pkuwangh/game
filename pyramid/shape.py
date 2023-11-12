@@ -14,6 +14,7 @@ class Shape:
         self.color = color
         self.variants = [{k: shape_config[k] for k in sorted(shape_config)}]
         self.add_variants()
+        self.used = False
 
     def _shift_horizontal(self, variant: Dict[int, List[int]]) -> None:
         offset = variant[0][0]
@@ -85,18 +86,52 @@ class Shape:
         for variant in self.variants:
             assert variant[0][0] == 0
 
-    def fill_board(self, board: List[List[str]], idx: int, pos_y: int, pos_x: int):
+    def clear_board(
+        self,
+        board: List[List[str]],
+        idx: int,
+        pos_y: int,
+        pos_x: int,
+        target_id: str,
+        empty_char: str,
+    ) -> None:
         variant = self.variants[idx]
         for sy in sorted(variant):
             y = pos_y + sy
+            if y < 0 or y >= len(board):
+                continue
+            for sx in variant[sy]:
+                x = sx + pos_x
+                if x < 0 or x >= len(board[y]):
+                    continue
+                if target_id in board[y][x]:
+                    board[y][x] = empty_char
+
+    def fill_board(
+        self,
+        board: List[List[str]],
+        idx: int,
+        pos_y: int,
+        pos_x: int,
+        empty_char: str = " ",
+        fixed: bool = False,
+    ) -> bool:
+        variant = self.variants[idx]
+        for sy in sorted(variant):
+            y = pos_y + sy
+            if fixed and (y < 0 or y >= len(board)):
+                return False
             while y >= len(board):
                 board.append([])
-            for sx in variant[y]:
+            for sx in variant[sy]:
                 x = sx + pos_x
+                if fixed and (x < 0 or x >= len(board[y]) or board[y][x] != empty_char):
+                    return False
                 while x >= len(board[y]):
-                    board[y] += " "
+                    board[y] += empty_char
                 # board[y][x] = self.id
                 board[y][x] = get_colored_str(self.id, self.color)
+        return True
 
     def print_shapes(self):
         span = 6
@@ -114,11 +149,17 @@ class Shape:
         print_board(board)
 
 
-def main():
+def init_shapes():
     with open("config_shapes.yaml", "rt") as fp:
         shape_configs = yaml.safe_load(fp)
+    shapes = []
     for id, shape_desc in shape_configs.items():
-        shape = Shape(id, shape_desc["color"], shape_desc["shape"])
+        shapes.append(Shape(id, shape_desc["color"], shape_desc["shape"]))
+    return shapes
+
+
+def main():
+    for shape in init_shapes():
         shape.print_shapes()
 
 
